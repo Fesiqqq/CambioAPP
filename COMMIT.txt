@@ -1,11 +1,15 @@
-Commit: refactor: extract exchange logic into custom hook and add loading states
+Commit: feat: integrate historical exchange rate chart across multiple periods
 
 Arquivos (A=criado, M=modificado, D=removido):
+  M	package.json
   M	src/App.jsx
-  M	src/components/CurrencyConverter.jsx
-  A	src/components/StatusMessage.jsx
-  A	src/components/StatusMessage.module.css
-  A	src/hooks/useAsync.js
-  A	src/hooks/useCurrencyExchange.js
+  A	src/components/CurrencyChart.jsx
+  A	src/components/CurrencyChart.module.css
+  A	src/components/PeriodSelector.jsx
+  A	src/components/PeriodSelector.module.css
+  M	src/constants/index.js
+  M	src/hooks/useCurrencyExchange.js
+  M	src/utils/dates.js
+  A	src/utils/rates.js
 
-Status dos testes: node --check: 8 .js/.mjs OK, 0 com erro; 5 arquivo(s) JSX sem compilação (sem esbuild/rede); hooks (useAsync com AbortController) e estados loading/erro revisados por leitura; falha de rede coberta no nível do serviço pelos testes mockados da etapa 03 (7/7 passaram). Teste visual com DevTools > Offline pendente para você.
+Status dos testes: node --check: 9 .js/.mjs OK, 0 com erro; 7 arquivo(s) JSX sem compilação (sem esbuild/rede); 8 períodos + normalizeSeries: OK. Renderização do Recharts não verificada visualmente (sem npm install/navegador); recharts adicionado ao package.json.
