@@ -1,28 +1,13 @@
-import { useEffect, useState } from 'react';
-import { getCurrencies, getLatestRate } from '../services/frankfurterService.js';
+import { useState } from 'react';
+import { useLatestRate } from '../hooks/useCurrencyExchange.js';
 import { parseAmount, formatMoney, formatRate } from '../utils/formatters.js';
-import { formatDate, toISODate } from '../utils/dates.js';
+import { formatDate } from '../utils/dates.js';
+import StatusMessage from './StatusMessage.jsx';
 import styles from './CurrencyConverter.module.css';
 
-export default function CurrencyConverter({ from, to, onChangeFrom, onChangeTo, onSwap }) {
-  const [currencies, setCurrencies] = useState({});
+export default function CurrencyConverter({ currencies, from, to, onChangeFrom, onChangeTo, onSwap }) {
   const [amountText, setAmountText] = useState('100');
-  const [quote, setQuote] = useState(null);
-
-  useEffect(() => {
-    getCurrencies().then(setCurrencies).catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    if (from === to) { setQuote({ rate: 1, date: toISODate(new Date()) }); return; }
-    let cancelled = false;
-    setQuote(null);
-    getLatestRate(from, to)
-      .then((d) => { if (!cancelled) setQuote({ rate: d.rates[to], date: d.date }); })
-      .catch(console.error);
-    return () => { cancelled = true; };
-  }, [from, to]);
-
+  const { data, loading, error } = useLatestRate(from, to);
   const amount = parseAmount(amountText);
   const invalid = amountText.trim() !== '' && amount === null;
   const options = Object.entries(currencies).map(([code, name]) => (
@@ -46,14 +31,18 @@ export default function CurrencyConverter({ from, to, onChangeFrom, onChangeTo, 
         </label>
       </div>
       {invalid && <p id="amount-err" className={styles.err}>Digite um número maior que zero (ex.: 100 ou 99,90).</p>}
+
       <div className={styles.result}>
-        {quote && amount !== null && (
+        {loading && <StatusMessage>Buscando cotação…</StatusMessage>}
+        {error && <StatusMessage type="error">{error}</StatusMessage>}
+        {!loading && !error && data && amount !== null && (
           <>
-            <p className={styles.big}>{formatMoney(amount * quote.rate, to)}</p>
-            <p className={styles.meta}>{formatMoney(amount, from)} = {formatMoney(amount * quote.rate, to)}</p>
-            <p className={styles.meta}>Taxa: 1 {from} = {formatRate(quote.rate)} {to} · Cotação de {formatDate(quote.date)}</p>
+            <p className={styles.big}>{formatMoney(amount * data.rate, to)}</p>
+            <p className={styles.meta}>{formatMoney(amount, from)} = {formatMoney(amount * data.rate, to)}</p>
+            <p className={styles.meta}>Taxa: 1 {from} = {formatRate(data.rate)} {to} · Cotação de {formatDate(data.date)}</p>
           </>
         )}
+        {!loading && !error && amount === null && !invalid && <StatusMessage>Informe um valor para converter.</StatusMessage>}
       </div>
     </section>
   );

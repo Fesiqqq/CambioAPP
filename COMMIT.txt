@@ -1,9 +1,11 @@
-Commit: feat: implement real-time currency conversion and coin swapping logic
+Commit: refactor: extract exchange logic into custom hook and add loading states
 
 Arquivos (A=criado, M=modificado, D=removido):
   M	src/App.jsx
   M	src/components/CurrencyConverter.jsx
-  A	src/utils/dates.js
-  A	src/utils/formatters.js
+  A	src/components/StatusMessage.jsx
+  A	src/components/StatusMessage.module.css
+  A	src/hooks/useAsync.js
+  A	src/hooks/useCurrencyExchange.js
 
-Status dos testes: node --check: 6 .js/.mjs OK, 0 com erro; 4 arquivo(s) JSX sem compilação (sem esbuild/rede); formatters/dates: 5 asserções OK. Inversão (estado elevado ao App) e cálculo validados por leitura de código; sem execução no navegador.
+Status dos testes: node --check: 8 .js/.mjs OK, 0 com erro; 5 arquivo(s) JSX sem compilação (sem esbuild/rede); hooks (useAsync com AbortController) e estados loading/erro revisados por leitura; falha de rede coberta no nível do serviço pelos testes mockados da etapa 03 (7/7 passaram). Teste visual com DevTools > Offline pendente para você.
