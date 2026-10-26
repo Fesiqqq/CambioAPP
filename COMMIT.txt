@@ -1,0 +1,19 @@
+Commit: chore: initialize project structure with vite and react
+
+Arquivos (A=criado, M=modificado, D=removido):
+  A	.gitignore
+  A	index.html
+  A	package.json
+  A	src/App.jsx
+  A	src/App.module.css
+  A	src/assets/.gitkeep
+  A	src/components/.gitkeep
+  A	src/constants/.gitkeep
+  A	src/hooks/.gitkeep
+  A	src/index.css
+  A	src/main.jsx
+  A	src/services/.gitkeep
+  A	src/utils/.gitkeep
+  A	vite.config.js
+
+Status dos testes: node --check: 1 .js/.mjs OK, 0 com erro; 2 arquivo(s) JSX sem compilação (sem esbuild/rede); package.json válido. Build do Vite não executado aqui (sem rede para npm install): validação estática; rode npm install && npm run dev para confirmar.
