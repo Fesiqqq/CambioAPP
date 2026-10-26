@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header.jsx';
 import CurrencyConverter from './components/CurrencyConverter.jsx';
 import CurrencyChart from './components/CurrencyChart.jsx';
+import CurrencyTable from './components/CurrencyTable.jsx';
 import StatusMessage from './components/StatusMessage.jsx';
 import { useCurrencies, useHistory } from './hooks/useCurrencyExchange.js';
 import { DEFAULT_FROM, DEFAULT_TO, DEFAULT_PERIOD } from './constants/index.js';
@@ -25,6 +26,7 @@ export default function App() {
             <CurrencyConverter currencies={currencies.data} from={from} to={to}
               onChangeFrom={setFrom} onChangeTo={setTo} onSwap={() => { setFrom(to); setTo(from); }} />
             <CurrencyChart from={from} to={to} period={period} onPeriodChange={setPeriod} {...history} />
+            <CurrencyTable rows={history.rows} loading={history.loading} error={history.error} />
           </>
         )}
       </main>

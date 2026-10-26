@@ -1,15 +1,12 @@
-Commit: feat: integrate historical exchange rate chart across multiple periods
+Commit: feat: add data table with multi-criteria filtering and sorting
 
 Arquivos (A=criado, M=modificado, D=removido):
-  M	package.json
   M	src/App.jsx
-  A	src/components/CurrencyChart.jsx
-  A	src/components/CurrencyChart.module.css
-  A	src/components/PeriodSelector.jsx
-  A	src/components/PeriodSelector.module.css
+  A	src/components/CurrencyFilters.jsx
+  A	src/components/CurrencyFilters.module.css
+  A	src/components/CurrencyTable.jsx
+  A	src/components/CurrencyTable.module.css
   M	src/constants/index.js
-  M	src/hooks/useCurrencyExchange.js
-  M	src/utils/dates.js
-  A	src/utils/rates.js
+  M	src/utils/rates.js
 
-Status dos testes: node --check: 9 .js/.mjs OK, 0 com erro; 7 arquivo(s) JSX sem compilação (sem esbuild/rede); 8 períodos + normalizeSeries: OK. Renderização do Recharts não verificada visualmente (sem npm install/navegador); recharts adicionado ao package.json.
+Status dos testes: node --check: 9 .js/.mjs OK, 0 com erro; 9 arquivo(s) JSX sem compilação (sem esbuild/rede); testes de filtro/ordenação/validação/datas executados (suite sem as funções de CSV): 14/14 passaram. Interface da tabela validada só por leitura.

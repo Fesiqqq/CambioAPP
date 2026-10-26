@@ -11,3 +11,4 @@ export const PERIODS = [
   { id: '5y', label: '5 anos', months: 60 },
   { id: '10y', label: '10 anos', months: 120 },
 ];
+export const EMPTY_FILTERS = { startDate: '', endDate: '', minRate: '', maxRate: '' };
