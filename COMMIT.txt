@@ -1,9 +1,12 @@
-Commit: feat: implement frankfurter api service and document endpoints
+Commit: feat: create currency converter interface and selection inputs
 
 Arquivos (A=criado, M=modificado, D=removido):
-  A	docs/API_TESTS.md
-  A	docs/postman/frankfurter.postman_collection.json
-  A	src/services/frankfurterService.js
-  A	tests/frankfurterService.test.mjs
+  M	src/App.jsx
+  M	src/App.module.css
+  A	src/components/CurrencyConverter.jsx
+  A	src/components/CurrencyConverter.module.css
+  A	src/components/Header.jsx
+  A	src/components/Header.module.css
+  A	src/constants/index.js
 
-Status dos testes: node --check: 3 .js/.mjs OK, 0 com erro; 2 arquivo(s) JSX sem compilação (sem esbuild/rede); serviço com fetch mockado: 7/7 passaram. Coleção Postman criada (4 requests), mas NÃO executada contra a API real (sem rede): resultados reais pendentes em docs/API_TESTS.md.
+Status dos testes: node --check: 4 .js/.mjs OK, 0 com erro; 4 arquivo(s) JSX sem compilação (sem esbuild/rede); seleção de moedas via getCurrencies() validada só por leitura de código (React/DOM não executados aqui); botão de inverter presente porém desabilitado até a etapa 05.
