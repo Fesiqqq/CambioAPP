@@ -24,5 +24,3 @@ Arquivo: `tests/utils.test.mjs`. Execute com `npm test` (Node puro, sem dependê
 
 ## Manuais (UI)
 Conversão com vírgula decimal, inversão de moedas, exportação com filtro ativo (linhas do CSV = linhas da tabela), botão de exportar desabilitado sem resultados.
-
-`npm test` também executa `tests/frankfurterService.test.mjs` (serviço com `fetch` mockado, 7/7 passaram).

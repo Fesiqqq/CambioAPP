@@ -1,0 +1,6 @@
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.h2 { margin: 0; font-size: 1.2rem; }
+.export { padding: 9px 16px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 600; cursor: pointer; }
+.export:disabled { opacity: .45; cursor: not-allowed; }
+.count { margin: 0 0 8px; color: var(--muted); font-size: .9rem; }
