@@ -1,8 +1,0 @@
-:root {
-  --bg: #eef2ef; --surface: #fff; --ink: #14261f; --muted: #5d6f67; --line: #d5ded9;
-  --accent: #0f6b4f; --accent-ink: #fff; --danger: #b3361f; --radius: 10px;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; line-height: 1.5; }
-button, input, select { font: inherit; color: inherit; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }

@@ -1,19 +1,8 @@
-Commit: chore: initialize project structure with vite and react
+Commit: docs: add initial project requirements and component architecture
 
 Arquivos (A=criado, M=modificado, D=removido):
-  A	.gitignore
-  A	index.html
-  A	package.json
-  A	src/App.jsx
-  A	src/App.module.css
-  A	src/assets/.gitkeep
-  A	src/components/.gitkeep
-  A	src/constants/.gitkeep
-  A	src/hooks/.gitkeep
-  A	src/index.css
-  A	src/main.jsx
-  A	src/services/.gitkeep
-  A	src/utils/.gitkeep
-  A	vite.config.js
+  A	README.md
+  A	docs/COMPONENTS.md
+  A	docs/REQUIREMENTS.md
 
-Status dos testes: node --check: 1 .js/.mjs OK, 0 com erro; 2 arquivo(s) JSX sem compilação (sem esbuild/rede); package.json válido. Build do Vite não executado aqui (sem rede para npm install): validação estática; rode npm install && npm run dev para confirmar.
+Status dos testes: Revisão de escopo por contagem: 10 requisitos funcionais, 5 não funcionais, 6 critérios de aceite, 6 regras de negócio, 8 componentes mapeados.
