@@ -1,8 +1,9 @@
-Commit: docs: add initial project requirements and component architecture
+Commit: feat: implement frankfurter api service and document endpoints
 
 Arquivos (A=criado, M=modificado, D=removido):
-  A	README.md
-  A	docs/COMPONENTS.md
-  A	docs/REQUIREMENTS.md
+  A	docs/API_TESTS.md
+  A	docs/postman/frankfurter.postman_collection.json
+  A	src/services/frankfurterService.js
+  A	tests/frankfurterService.test.mjs
 
-Status dos testes: Revisão de escopo por contagem: 10 requisitos funcionais, 5 não funcionais, 6 critérios de aceite, 6 regras de negócio, 8 componentes mapeados.
+Status dos testes: node --check: 3 .js/.mjs OK, 0 com erro; 2 arquivo(s) JSX sem compilação (sem esbuild/rede); serviço com fetch mockado: 7/7 passaram. Coleção Postman criada (4 requests), mas NÃO executada contra a API real (sem rede): resultados reais pendentes em docs/API_TESTS.md.
