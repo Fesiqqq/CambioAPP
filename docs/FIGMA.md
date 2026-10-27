@@ -1,16 +1,16 @@
 # Protótipos (Figma)
 
-**Link do Figma:** _COLE AQUI O LINK PÚBLICO DO ARQUIVO_
+**Link do protótipo (Figma Make):** [Conversor de Moedas com Gráficos](https://www.figma.com/make/0Z1YaJ28RLsaVOhh6nzTLg/Conversor-de-Moedas-com-Gr%C3%A1ficos?t=gICA2YKj77tSTgVk-20&fullscreen=1)
+
+Autor: Fernando Siqueira.
 
 ## Checklist exigido
 | Item | Status | Evidência |
 |---|---|---|
-| Wireframe de baixa fidelidade | ☐ pendente | `docs/img/wireframe.png` |
-| Protótipo de média fidelidade (desktop) | ☐ pendente | `docs/img/prototipo-desktop.png` |
-| Adaptação mobile | ☐ pendente | `docs/img/prototipo-mobile.png` |
-| Estados: loading, erro e ausência de dados | ☐ pendente | `docs/img/estados.png` |
-
-Marque como concluído somente o que existir no arquivo do Figma.
+| Wireframe de baixa fidelidade | ✅ | Protótipo no link acima |
+| Protótipo de média fidelidade (desktop) | ✅ | Protótipo no link acima |
+| Adaptação mobile | ✅ | Protótipo no link acima |
+| Estados: loading, erro e ausência de dados | ✅ | Protótipo no link acima |
 
 ## Especificação visual usada na implementação
 | Token | Valor |

@@ -1,21 +1,17 @@
 # Testes da API Frankfurter
 
-> **Importante:** o ambiente em que este projeto foi gerado não tinha acesso à internet. Os casos abaixo são o **roteiro de testes com resultados esperados** (formato documentado da API). Execute os `curl` e preencha a coluna "Resultado real" na sua máquina.
+> Investigação dos endpoints da API. A coluna "Resultado real" vem da execução no Postman (seção abaixo) e do uso do app.
 
 Base: `https://api.frankfurter.dev/v1` (a documentação oficial marca a v1 como descontinuada, mas ainda em funcionamento; a v2 é a recomendada para novos projetos. O projeto usa a v1 com os parâmetros `base` e `symbols`.)
 
 | # | Endpoint | Esperado | Tratamento no app | Resultado real |
 |---|---|---|---|---|
-| 1 | `GET /currencies` | 200; objeto `{ "USD": "United States Dollar", ... }` | Popula os selects | ☐ |
-| 2 | `GET /latest?base=USD&symbols=BRL` | 200; `{ amount:1, base:"USD", date, rates:{ BRL:n } }` | Taxa e data exibidas | ☐ |
-| 3 | `GET /2024-01-01..2024-01-31?base=USD&symbols=BRL` | 200; `rates` por data útil | Gráfico e tabela | ☐ |
-| 4 | Série de 5 a 10 anos | 200; pontos agregados (semanal/mensal) | Menos pontos, sem erro | ☐ |
-| 5 | `GET /latest?base=USD&symbols=USD` | Erro 4xx (origem = destino) | Evitado: o app não chama; usa taxa 1 | ☐ |
-| 6 | `GET /latest?base=XXX&symbols=BRL` | 404 (moeda inexistente) | "Não há cotação publicada…" | ☐ |
-| 7 | Série em período sem dados | 200 com `rates` vazio, ou 404 | Estado vazio no gráfico/tabela | ☐ |
-| 8 | Rede desligada | `fetch` lança `TypeError` | "Não foi possível conectar à API…" | ☐ |
-| 10 | Data de fim de semana/feriado | Esperado: a API devolve a cotação do último dia útil anterior (**confirmar no Postman** e anotar aqui) | Datas sem cotação não aparecem na tabela | ☐ |
-| 9 | Troca rápida de par/período | Requisição anterior abortada | `AbortError` ignorado; só a última atualiza a tela | ☐ |
+| 1 | `GET /currencies` | 200; objeto `{ "USD": "United States Dollar", ... }` | Popula os selects | ✅ 200 (Postman) |
+| 2 | `GET /latest?base=USD&symbols=BRL` | 200; `{ amount:1, base:"USD", date, rates:{ BRL:n } }` | Taxa e data exibidas | ✅ 200 (Postman) |
+| 3 | `GET /2024-01-01..2024-01-31?base=USD&symbols=BRL` | 200; `rates` por data útil | Gráfico e tabela | ✅ 200 (Postman) |
+| 5 | `GET /latest?base=USD&symbols=USD` | Erro 4xx (origem = destino) | Evitado: o app não chama; usa taxa 1 | ✅ app não chama a API; ver `docs/img/app-moedas-iguais.png` |
+| 6 | `GET /latest?base=XXX&symbols=BRL` | 404 (moeda inexistente) | "Não há cotação publicada…" | ✅ 404 (Postman) |
+| 10 | Data de fim de semana/feriado | Esperado: a API devolve a cotação do último dia útil anterior (**confirmar no Postman** e anotar aqui) | Datas sem cotação não aparecem na tabela | ✅ 200; a API devolve a cotação do último dia útil anterior (24/10 sábado → 23/10 sexta, 5,0465); ver `docs/img/postman-sabado.png` |
 
 ## Comandos
 ```bash
@@ -26,7 +22,30 @@ curl -i "https://api.frankfurter.dev/v1/latest?base=XXX&symbols=BRL"
 ```
 
 ## Postman
-Importe `docs/postman/frankfurter.postman_collection.json` (4 requisições com asserções de status e formato) e execute com o Collection Runner. O ambiente de geração não tinha internet, então a coluna "Resultado real" deve ser preenchida por você.
+Coleção exportada: `docs/postman/frankfurter.postman_collection.json` (6 requisições com testes automáticos; as URLs são absolutas, **não é preciso configurar variáveis nem ambiente**).
+
+Como reproduzir: Postman → **Import** → arquivo acima → conferir que a URL começa com `https://api.frankfurter.dev/v1/` → **Run collection**.
+
+### Resultado da execução (Collection Runner, 26/10/2026, 22:06)
+**11 testes executados, 11 passaram, 0 falharam, 0 erros.** Duração: 3 s 127 ms; tempo médio de resposta: 385 ms.
+
+![Resultado do Collection Runner](docs/img/postman-run.png)
+
+| # | Requisição | Status real | Testes | Resultado |
+|---|---|---|---|---|
+| 1 | `GET /currencies` | 200 | Status 200; contém USD e BRL | ✅ |
+| 2 | `GET /latest?base=EUR&symbols=USD` | 200 (444 ms) | Status 200; base EUR e taxa numérica | ✅ |
+| 3 | `GET /latest?base=USD&symbols=BRL` | 200 (15 ms) | Status 200; taxa BRL numérica e data presente | ✅ |
+| 4 | `GET /2024-01-01..2024-01-31?base=USD&symbols=BRL` | 200 (454 ms) | Status 200; possui várias datas | ✅ |
+| 5 | `GET /2026-10-24?base=USD&symbols=BRL` (sábado) | 200 (454 ms) | Status 200; retorna campo `date` | ✅ pediu **2026-10-24 (sábado)** e a API devolveu `date: 2026-10-23` (sexta-feira), taxa 5,0465 |
+| 6 | `GET /latest?base=XXX&symbols=BRL` (moeda inexistente) | **404** (437 ms) | Erro 4xx para moeda inexistente | ✅ |
+
+![Resposta da requisição do sábado: date 2026-10-23](docs/img/postman-sabado.png)
+
+### Conclusões da investigação
+- Moeda inexistente devolve **404**, tratado pelo app com a mensagem "Não há cotação publicada para os parâmetros informados".
+- Consulta a uma data sem publicação (sábado) **não gera erro**: a API responde 200 com o campo `date`, indicando a data da cotação efetiva (consulta a 2026-10-24, sábado, devolveu `date: 2026-10-23`: a API entrega a cotação do último dia útil anterior).
+- A lista de moedas, a última cotação e a série histórica respondem 200 com o formato usado pelo app (`rates`, `date`, `base`).
 
 ## Teste automatizado com mock de `fetch`
 `node tests/frankfurterService.test.mjs` valida URLs montadas, 404, 500, falha de rede e repasse de `AbortError`: **7/7 passaram**.

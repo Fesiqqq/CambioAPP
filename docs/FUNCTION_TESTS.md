@@ -31,3 +31,18 @@ Conversão com vírgula decimal, inversão de moedas, exportação com filtro at
 - Conversão com valor decimal, gráfico, tabela e contador de registros: `docs/img/app-desktop-usd-brl.png`.
 - Moedas iguais (botão Exportar CSV desabilitado, avisos no histórico e na tabela): `docs/img/app-moedas-iguais.png`.
 - Exportação CSV com filtro/período ativo: `docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv` (cabeçalho `Data,Moeda de origem,Moeda de destino,Cotacao` e datas dentro do intervalo do nome do arquivo).
+
+## Checklist dos testes mínimos do enunciado
+| Teste | Situação | Evidência |
+|---|---|---|
+| Conversão entre duas moedas | ✅ USD→BRL e NZD→BRL (1.500 × 3,1746 = R$ 4.761,90) | `app-desktop-usd-brl.png`, `app-filtros-combinados-ordenacao.png` |
+| Atualização dos dados ao alterar o par | ✅ par trocado para NZD/BRL; gráfico e tabela acompanham | `app-filtros-combinados-ordenacao.png` |
+| Gráfico com dados reais | ✅ | `app-desktop-usd-brl.png` |
+| Tabela com dados reais | ✅ | `app-desktop-usd-brl.png` |
+| Filtros combinados (datas + mín. + máx.) e contador | ✅ 3 de 22 registros | `app-filtros-combinados-ordenacao.png` |
+| Ordenação por data | ✅ "Data (mais antiga)": 05/10, 06/10, 12/10 | `app-filtros-combinados-ordenacao.png` |
+| Exportação CSV | ✅ | `docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv` |
+| Entrada inválida | ✅ "as" → mensagem de erro e resultado oculto | `app-valor-invalido.png` |
+| Moedas iguais | ✅ | `app-moedas-iguais.png` |
+| Responsividade mobile | ✅ layout em coluna única, seletores e botões empilhados | `app-mobile-conversor.png`, `app-mobile-grafico-filtros.png` |
+| Instalação e execução a partir do README | ✅ `npm install` + `npm run dev` | — |

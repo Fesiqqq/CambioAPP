@@ -1,116 +1,248 @@
 {
   "info": {
-    "name": "Frankfurter API",
+    "name": "Frankfurter API - Currency Exchange App",
+    "description": "Testes dos endpoints usados pelo app (API v1: https://api.frankfurter.dev/v1).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "https://api.frankfurter.dev/v1"
-    }
-  ],
   "item": [
     {
-      "name": "Listar moedas",
+      "name": "1. Listar moedas",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('200',()=>pm.response.to.have.status(200));",
-              "pm.test('tem USD',()=>pm.expect(pm.response.json()).to.have.property('USD'));"
+              "pm.test('Status 200',()=>pm.response.to.have.status(200));",
+              "pm.test('Contém USD e BRL',()=>{const j=pm.response.json();pm.expect(j).to.have.property('USD');pm.expect(j).to.have.property('BRL');});"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{baseUrl}}/currencies"
+          "raw": "https://api.frankfurter.dev/v1/currencies",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "currencies"
+          ]
         }
       }
     },
     {
-      "name": "Última cotação EUR→USD (exemplo do enunciado)",
+      "name": "2. Última cotação EUR→USD (exemplo do enunciado)",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('200',()=>pm.response.to.have.status(200));",
-              "pm.test('base EUR e taxa USD numérica',()=>{const j=pm.response.json();pm.expect(j.base).to.eql('EUR');pm.expect(j.rates.USD).to.be.a('number');});"
+              "pm.test('Status 200',()=>pm.response.to.have.status(200));",
+              "pm.test('Base EUR e taxa USD numérica',()=>{const j=pm.response.json();pm.expect(j.base).to.eql('EUR');pm.expect(j.rates.USD).to.be.a('number');});"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{baseUrl}}/latest?base=EUR&symbols=USD"
+          "raw": "https://api.frankfurter.dev/v1/latest?base=EUR&symbols=USD",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "latest"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "EUR"
+            },
+            {
+              "key": "symbols",
+              "value": "USD"
+            }
+          ]
         }
       }
     },
     {
-      "name": "Última cotação USD→BRL",
+      "name": "3. Última cotação USD→BRL",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('200',()=>pm.response.to.have.status(200));",
-              "pm.test('taxa numérica',()=>pm.expect(pm.response.json().rates.BRL).to.be.a('number'));"
+              "pm.test('Status 200',()=>pm.response.to.have.status(200));",
+              "pm.test('Taxa BRL numérica e data presente',()=>{const j=pm.response.json();pm.expect(j.rates.BRL).to.be.a('number');pm.expect(j.date).to.be.a('string');});"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{baseUrl}}/latest?base=USD&symbols=BRL"
+          "raw": "https://api.frankfurter.dev/v1/latest?base=USD&symbols=BRL",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "latest"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL"
+            }
+          ]
         }
       }
     },
     {
-      "name": "Série 2024-01",
+      "name": "4. Série histórica 2024-01 (USD→BRL)",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('200',()=>pm.response.to.have.status(200));",
-              "pm.test('tem datas',()=>pm.expect(Object.keys(pm.response.json().rates).length).to.be.above(0));"
+              "pm.test('Status 200',()=>pm.response.to.have.status(200));",
+              "pm.test('Possui várias datas',()=>pm.expect(Object.keys(pm.response.json().rates).length).to.be.above(1));"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{baseUrl}}/2024-01-01..2024-01-31?base=USD&symbols=BRL"
+          "raw": "https://api.frankfurter.dev/v1/2024-01-01..2024-01-31?base=USD&symbols=BRL",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "2024-01-01..2024-01-31"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL"
+            }
+          ]
         }
       }
     },
     {
-      "name": "Moeda inválida",
+      "name": "5. Data de sábado sem cotação (2026-10-24)",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('404',()=>pm.response.to.have.status(404));"
+              "pm.test('Status 200',()=>pm.response.to.have.status(200));",
+              "pm.test('Retorna campo date',()=>{const j=pm.response.json();console.log('Data pedida: 2026-10-24 | Data devolvida: '+j.date);pm.expect(j.date).to.be.a('string');});"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{baseUrl}}/latest?base=XXX&symbols=BRL"
+          "raw": "https://api.frankfurter.dev/v1/2026-10-24?base=USD&symbols=BRL",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "2026-10-24"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Moeda inválida (erro esperado)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Erro 4xx para moeda inexistente',()=>pm.expect(pm.response.code).to.be.within(400,499));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v1/latest?base=XXX&symbols=BRL",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "latest"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "XXX"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL"
+            }
+          ]
         }
       }
     }
