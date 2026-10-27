@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useLatestRate } from '../hooks/useExchangeRates.js';
-import { parseAmount, formatMoney, formatRate } from '../utils/format.js';
+import { useLatestRate } from '../hooks/useCurrencyExchange.js';
+import { parseAmount, formatMoney, formatRate } from '../utils/formatters.js';
 import { formatDate } from '../utils/dates.js';
 import StatusMessage from './StatusMessage.jsx';
-import styles from './Converter.module.css';
+import styles from './CurrencyConverter.module.css';
 
-export default function Converter({ currencies, from, to, onChangeFrom, onChangeTo, onSwap }) {
+export default function CurrencyConverter({ currencies, from, to, onChangeFrom, onChangeTo, onSwap }) {
   const [amountText, setAmountText] = useState('100');
   const { data, loading, error } = useLatestRate(from, to);
   const amount = parseAmount(amountText);

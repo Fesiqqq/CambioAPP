@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useAsync } from './useAsync.js';
-import { getCurrencies, getLatestRate, getTimeSeries } from '../services/frankfurter.js';
+import { getCurrencies, getLatestRate, getTimeSeries } from '../services/frankfurterService.js';
 import { PERIODS } from '../constants/index.js';
 import { getStartDate, toISODate } from '../utils/dates.js';
 import { normalizeSeries } from '../utils/rates.js';

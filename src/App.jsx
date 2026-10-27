@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Header from './components/Header.jsx';
-import Converter from './components/Converter.jsx';
-import RateChart from './components/RateChart.jsx';
-import DataSection from './components/DataSection.jsx';
+import CurrencyConverter from './components/CurrencyConverter.jsx';
+import CurrencyChart from './components/CurrencyChart.jsx';
+import CurrencyTable from './components/CurrencyTable.jsx';
 import StatusMessage from './components/StatusMessage.jsx';
-import { useCurrencies, useHistory } from './hooks/useExchangeRates.js';
+import { useCurrencies, useHistory } from './hooks/useCurrencyExchange.js';
 import { DEFAULT_FROM, DEFAULT_TO, DEFAULT_PERIOD } from './constants/index.js';
 import styles from './App.module.css';
 
@@ -23,13 +23,14 @@ export default function App() {
         {currencies.error && <StatusMessage type="error">{currencies.error}</StatusMessage>}
         {currencies.data && (
           <>
-            <Converter currencies={currencies.data} from={from} to={to}
+            <CurrencyConverter currencies={currencies.data} from={from} to={to}
               onChangeFrom={setFrom} onChangeTo={setTo} onSwap={() => { setFrom(to); setTo(from); }} />
-            <RateChart from={from} to={to} period={period} onPeriodChange={setPeriod} {...history} />
-            <DataSection rows={history.rows} loading={history.loading} error={history.error} />
+            <CurrencyChart from={from} to={to} period={period} onPeriodChange={setPeriod} {...history} />
+            <CurrencyTable rows={history.rows} loading={history.loading} error={history.error} />
           </>
         )}
       </main>
+      <footer className={styles.footer}>Dados: Frankfurter API (Banco Central Europeu). Há cotações apenas em dias úteis.</footer>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { validateFilters } from '../utils/rates.js';
 import StatusMessage from './StatusMessage.jsx';
-import styles from './Filters.module.css';
+import styles from './CurrencyFilters.module.css';
 
-export default function Filters({ filters, onChange, onClear, sortKey, sortDir, onSortChange }) {
+export default function CurrencyFilters({ filters, onChange, onClear, sortKey, sortDir, onSortChange }) {
   const set = (name) => (e) => onChange({ ...filters, [name]: e.target.value });
   const problem = validateFilters(filters);
   return (

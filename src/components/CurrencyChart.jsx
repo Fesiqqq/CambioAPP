@@ -2,10 +2,10 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContai
 import PeriodSelector from './PeriodSelector.jsx';
 import StatusMessage from './StatusMessage.jsx';
 import { formatDate } from '../utils/dates.js';
-import { formatRate } from '../utils/format.js';
-import styles from './RateChart.module.css';
+import { formatRate } from '../utils/formatters.js';
+import styles from './CurrencyChart.module.css';
 
-export default function RateChart({ from, to, period, onPeriodChange, rows, loading, error }) {
+export default function CurrencyChart({ from, to, period, onPeriodChange, rows, loading, error }) {
   return (
     <section className={styles.card} aria-labelledby="chart-title">
       <h2 id="chart-title" className={styles.h2}>Histórico {from}/{to}</h2>

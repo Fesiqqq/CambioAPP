@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.frankfurter.app';
+const BASE_URL = 'https://api.frankfurter.dev/v1';
 
 async function request(path, signal) {
   let res;
@@ -17,8 +17,8 @@ async function request(path, signal) {
 export const getCurrencies = (signal) => request('/currencies', signal);
 
 /** { amount, base, date, rates: { BRL: 5.1 } } */
-export const getLatestRate = (from, to, signal) => request(`/latest?from=${from}&to=${to}`, signal);
+export const getLatestRate = (from, to, signal) => request(`/latest?base=${from}&symbols=${to}`, signal);
 
 /** { base, start_date, end_date, rates: { '2024-01-02': { BRL: 4.9 } } } */
 export const getTimeSeries = (from, to, start, end, signal) =>
-  request(`/${start}..${end}?from=${from}&to=${to}`, signal);
+  request(`/${start}..${end}?base=${from}&symbols=${to}`, signal);

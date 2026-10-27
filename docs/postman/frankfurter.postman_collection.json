@@ -6,7 +6,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://api.frankfurter.app"
+      "value": "https://api.frankfurter.dev/v1"
     }
   ],
   "item": [
@@ -32,6 +32,27 @@
       }
     },
     {
+      "name": "Última cotação EUR→USD (exemplo do enunciado)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200',()=>pm.response.to.have.status(200));",
+              "pm.test('base EUR e taxa USD numérica',()=>{const j=pm.response.json();pm.expect(j.base).to.eql('EUR');pm.expect(j.rates.USD).to.be.a('number');});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/latest?base=EUR&symbols=USD"
+        }
+      }
+    },
+    {
       "name": "Última cotação USD→BRL",
       "event": [
         {
@@ -48,7 +69,7 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{baseUrl}}/latest?from=USD&to=BRL"
+          "raw": "{{baseUrl}}/latest?base=USD&symbols=BRL"
         }
       }
     },
@@ -69,7 +90,7 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{baseUrl}}/2024-01-01..2024-01-31?from=USD&to=BRL"
+          "raw": "{{baseUrl}}/2024-01-01..2024-01-31?base=USD&symbols=BRL"
         }
       }
     },
@@ -89,7 +110,7 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{baseUrl}}/latest?from=XXX&to=BRL"
+          "raw": "{{baseUrl}}/latest?base=XXX&symbols=BRL"
         }
       }
     }

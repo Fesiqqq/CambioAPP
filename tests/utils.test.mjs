@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { parseAmount, formatRate } from '../src/utils/format.js';
+import { parseAmount, formatRate } from '../src/utils/formatters.js';
 import { getStartDate } from '../src/utils/dates.js';
 import { normalizeSeries, filterRows, sortRows, validateFilters } from '../src/utils/rates.js';
-import { buildCsv } from '../src/utils/csv.js';
+import { buildCsv } from '../src/utils/csvExporter.js';
 import { PERIODS } from '../src/constants/index.js';
 
 const rows = [
