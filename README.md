@@ -49,3 +49,6 @@ React 18, Vite 5, CSS Modules, Recharts, Fetch API (`async/await`). O CSV usa fu
 ![Estado com moedas iguais](docs/img/app-moedas-iguais.png)
 
 Exemplo de arquivo exportado: [`docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv`](docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv)
+
+## Solução de problemas
+**Erro `Uma política de Controle de Aplicativo bloqueou este arquivo` (Windows, `rollup.win32-x64-msvc.node`):** o `package.json` já usa o Rollup em WebAssembly (`overrides`), que não depende de arquivo nativo. Apague `node_modules` e `package-lock.json` e rode `npm install` novamente. Se o seu computador não tiver esse bloqueio, o override pode ser removido.
