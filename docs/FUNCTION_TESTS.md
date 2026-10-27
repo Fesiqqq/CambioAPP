@@ -26,3 +26,8 @@ Arquivo: `tests/utils.test.mjs`. Execute com `npm test` (Node puro, sem dependê
 Conversão com vírgula decimal, inversão de moedas, exportação com filtro ativo (linhas do CSV = linhas da tabela), botão de exportar desabilitado sem resultados.
 
 `npm test` também executa `tests/frankfurterService.test.mjs` (serviço com `fetch` mockado, 7/7 passaram).
+
+## Evidências dos testes manuais
+- Conversão com valor decimal, gráfico, tabela e contador de registros: `docs/img/app-desktop-usd-brl.png`.
+- Moedas iguais (botão Exportar CSV desabilitado, avisos no histórico e na tabela): `docs/img/app-moedas-iguais.png`.
+- Exportação CSV com filtro/período ativo: `docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv` (cabeçalho `Data,Moeda de origem,Moeda de destino,Cotacao` e datas dentro do intervalo do nome do arquivo).

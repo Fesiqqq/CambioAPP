@@ -40,10 +40,12 @@ React 18, Vite 5, CSS Modules, Recharts, Fetch API (`async/await`). O CSV usa fu
 `docs/REQUIREMENTS.md`, `docs/COMPONENTS.md`, `docs/API_TESTS.md`, `docs/FUNCTION_TESTS.md`, `docs/FIGMA.md`, `docs/AI_USAGE.md` e `docs/STEPS.md` (as 10 etapas, commits e status de testes). Coleção Postman em `docs/postman/`.
 
 ## Imagens
-Adicione prints reais da aplicação em `docs/img/` e referencie aqui:
-```md
-![Conversor](docs/img/conversor.png)
-![Histórico](docs/img/historico.png)
-![Tabela e filtros](docs/img/tabela.png)
-![Mobile](docs/img/mobile.png)
-```
+**Aplicação em execução (dados reais da Frankfurter API, 26/10/2026)**: conversão USD→BRL, gráfico de 30 dias e tabela com 22 registros.
+
+![Aplicação desktop: conversor, histórico e tabela](docs/img/app-desktop-usd-brl.png)
+
+**Moedas iguais**: o conversor devolve taxa 1 e o histórico exibe aviso (a API não aceita origem = destino).
+
+![Estado com moedas iguais](docs/img/app-moedas-iguais.png)
+
+Exemplo de arquivo exportado: [`docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv`](docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv)

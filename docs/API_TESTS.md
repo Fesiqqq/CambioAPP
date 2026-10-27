@@ -30,3 +30,18 @@ Importe `docs/postman/frankfurter.postman_collection.json` (4 requisições com 
 
 ## Teste automatizado com mock de `fetch`
 `node tests/frankfurterService.test.mjs` valida URLs montadas, 404, 500, falha de rede e repasse de `AbortError`: **7/7 passaram**.
+
+## Evidências de execução na aplicação (dados reais)
+Executado localmente com `npm run dev` em 26/10/2026:
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| Moedas carregadas dinamicamente | `docs/img/app-desktop-usd-brl.png` | Selects preenchidos pela API |
+| Última cotação USD→BRL | mesma imagem | 1 USD = 5,5884 BRL em 26/10/2026; 1.500 USD = R$ 8.382,60 (conferido: 1500 × 5,5884) |
+| Série histórica de 30 dias | mesma imagem | Gráfico e 22 registros na tabela, todos em dias úteis |
+| Origem = destino | `docs/img/app-moedas-iguais.png` | Taxa 1,0000 no conversor; histórico mostra "Escolha moedas diferentes para ver o histórico." |
+| Exportação CSV | `docs/evidencias/cotacoes_BRL-EUR_2026-09-29_a_2026-10-26.csv` | Cabeçalho + 20 linhas; nome `cotacoes_BRL-EUR_<início>_a_<fim>.csv` |
+
+### Observações
+- Em 26/10/2026 a cotação aparece cerca de 10% acima da de 23/10 (USD/BRL 5,0465 → 5,5884). O mesmo salto aparece no par BRL→EUR do CSV (0,17704 → 0,15994), então vem da própria API e não de cálculo da aplicação. A documentação da Frankfurter indica que dados do dia corrente podem ser atualizados em novas publicações; confirmar no Postman.
+- Para moedas iguais, a data exibida no conversor usa a data UTC do navegador (por isso pode mostrar o dia seguinte à noite no Brasil). Não afeta pares de moedas diferentes, cuja data vem da API.
